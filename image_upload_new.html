@@ -1,0 +1,48 @@
+<html>
+
+    <head>
+        <title>Display Uploaded Image in HTML Using Javascript</title>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    </head>
+
+    <body>
+        <div class="container" style="padding-top:20px;">
+            <h3>Display Uploaded Image</h3>
+            <div>
+                <label for="image">Choose Image</label>
+                <input type="file" name="image" id="image">
+            </div>
+            <div>
+                <img id="show_image" width="auto">
+            </div>
+        </div>
+        <p id="fileInfo"></p>
+        <div>
+            Enter the required width:
+            <input type="text" name="width" id="req_width">
+            <br>
+        </div>
+        <div>
+            Enter the required height:
+            <input type="text" name="height" id="req_height">
+            <br>
+        </div>
+        <button id="myBtn">Submit</button>
+        <div>
+            Your aspect ratio:
+            <input type="text" placeholder="" name="aspectRatio" id="req_aspect_ratio">
+            <br>
+        </div>
+
+        <p id="imageShrink"></p>
+
+        <div id="processedImage"></divs>
+
+        <!-- <button id="lanscape">For Landscape</button>
+        <button id="portrait">For Portrait</button>
+        <button id="square">For Square</button> -->
+        
+    <body>
+    <script src="image_upload_new.js"></script>
+
+</html>
