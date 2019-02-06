@@ -4,12 +4,14 @@ app.image = $('#image');
 app.myBtn = document.getElementById('myBtn');
 app.aspect_ratio_image = 0;
 app.aspect_ratio_user = 0;
-app.showImage = $('#show_image'); 
+app.showImage = $('#show_image');
+app.showImg = $('.show_img');  
 app.req_height = 0;
 app.req_width = 0;
 app.req_aspect_ratio = document.getElementById('req_aspect_ratio');
 app.fileInfo = document.getElementById('fileInfo');
 app.imageShrink = document.getElementById('imageShrink');
+app.ctx = (app.showImg)[0].getContext('2d');
 app.processedImage = $('#processedImage');
 
 app.readImageFile = function (file) {
@@ -18,6 +20,8 @@ app.readImageFile = function (file) {
     app.reader.onload = function (e) {
         app.img = new Image();      
         app.img.src = e.target.result;
+        //console.log(app.img);
+        //console.log(app.img.src);
         app.showImage.attr('src', app.img.src);
 
         app.img.onload = function () {
@@ -42,21 +46,42 @@ app.inputValues = function () {
         app.aspect_ratio_user = app.req_width/app.req_height;
         app.aspect_ratio_user = app.aspect_ratio_user.toFixed(2);
         app.req_aspect_ratio.setAttribute('placeholder',app.aspect_ratio_user);
+        app.calculator();
       });
-      app.calculator();   
+         
 }
 
-// app.calculator = function () {
-//     if(app.aspect_ratio_image == app.aspect_ratio_user) {
-//         app.imageShrink.innerHTML = app.imageShrink.innerHTML + '<br /> ' +
-//         'Aspect Ratio has been same so Image has been shrinked as per the required size';
-//         app.processedImage.innerHTML = app.processedImage.innerHTML + '<br/>' +
-//         '<img style= width:' app.req_width + 'height:' app.req_height + 'id:show_image>'
-//     }
-// }
-    // app.landscape();
-    // app.portrait();
-    // app.square();
+app.calculator = function () {
+    if(app.aspect_ratio_user === app.aspect_ratio_image) {
+        console.log('equal to case');
+        app.imageShrink.innerHTML = app.imageShrink.innerHTML + '<br /> ' +
+        'Aspect Ratio has been same so Image has been shrinked as per the required size';
+        app.showImg.attr('src', app.img.src);
+        app.showImg.attr('width', app.req_width);
+        app.showImg.attr('height', app.req_height);
+    }
+
+    else if(app.aspect_ratio_user >= app.aspect_ratio_image) {
+        console.log('greater than case');
+        app.window.onload = function() {
+            //app.ctx = app.showImg.getContext("2d");
+            app.ctx.drawImage(app.showImage, 0, 0);
+            app.showImg.attr('src', app.img.src);
+            app.showImg.attr('width', app.req_width);
+            app.showImg.attr('height', app.req_height);
+          }
+    }
+
+    else if(app.aspect_ratio_user <= app.aspect_ratio_image) {
+        console.log('less than case');
+        app.window.onload = function() {
+            app.ctx.drawImage(app.showImage, 0, 0);
+            app.showImg.attr('src', app.img.src);
+            app.showImg.attr('width', app.req_width);
+            app.showImg.attr('height', app.req_height);
+          }
+    }
+}
 
 app.image.change(function() {
     app.readImageFile(this);
