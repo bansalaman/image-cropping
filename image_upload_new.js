@@ -5,14 +5,14 @@ app.myBtn = document.getElementById('myBtn');
 app.aspect_ratio_image = 0;
 app.aspect_ratio_user = 0;
 app.showImage = $('#show_image');
-app.showImg = $('.show_img');  
+app.showImg = $('.show_img');
+app.showImgCanvas = $('.show_img_canvas');  
 app.req_height = 0;
 app.req_width = 0;
 app.req_aspect_ratio = document.getElementById('req_aspect_ratio');
 app.fileInfo = document.getElementById('fileInfo');
 app.imageShrink = document.getElementById('imageShrink');
-app.ctx = (app.showImg)[0].getContext('2d');
-app.processedImage = $('#processedImage');
+app.ctx = (app.showImgCanvas)[0].getContext('2d');
 
 app.readImageFile = function (file) {
     app.reader = new FileReader(); // CREATE AN NEW INSTANCE.
@@ -20,8 +20,6 @@ app.readImageFile = function (file) {
     app.reader.onload = function (e) {
         app.img = new Image();      
         app.img.src = e.target.result;
-        //console.log(app.img);
-        //console.log(app.img.src);
         app.showImage.attr('src', app.img.src);
 
         app.img.onload = function () {
@@ -48,7 +46,6 @@ app.inputValues = function () {
         app.req_aspect_ratio.setAttribute('placeholder',app.aspect_ratio_user);
         app.calculator();
       });
-         
 }
 
 app.calculator = function () {
@@ -63,23 +60,23 @@ app.calculator = function () {
 
     else if(app.aspect_ratio_user >= app.aspect_ratio_image) {
         console.log('greater than case');
-        app.window.onload = function() {
-            //app.ctx = app.showImg.getContext("2d");
-            app.ctx.drawImage(app.showImage, 0, 0);
-            app.showImg.attr('src', app.img.src);
-            app.showImg.attr('width', app.req_width);
-            app.showImg.attr('height', app.req_height);
-          }
+        window.onload = function() {
+            console.log('Bansal');        
+            app.ctx.drawImage(app.showImgCanvas, 0, 0);
+            //app.showImgCanvas.attr('src', app.img.src);
+            app.showImgCanvas.attr('width', app.req_width);
+            app.showImgCanvas.attr('height', app.req_height);
+        }
     }
 
     else if(app.aspect_ratio_user <= app.aspect_ratio_image) {
         console.log('less than case');
-        app.window.onload = function() {
-            app.ctx.drawImage(app.showImage, 0, 0);
-            app.showImg.attr('src', app.img.src);
-            app.showImg.attr('width', app.req_width);
-            app.showImg.attr('height', app.req_height);
-          }
+        window.onload = function() {
+            app.ctx.drawImage(app.showImgCanvas, 0, 0);
+            //app.showImgCanvas.attr('src', app.img.src);
+            app.showImgCanvas.attr('width', app.req_width);
+            app.showImgCanvas.attr('height', app.req_height);
+        }
     }
 }
 
