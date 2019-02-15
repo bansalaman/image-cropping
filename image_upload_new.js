@@ -60,13 +60,14 @@ app.calculator = function () {
 
     else if(app.aspect_ratio_user >= app.aspect_ratio_image) {
         console.log('greater than case');
-        $(document).ready(function() {
-            console.log('Bansal');        
+        //window.onload = function() {
+            console.log('Bansal');
+            app.showImgCanvas.attr('width', app.req_width);
+            app.showImgCanvas.attr('height', app.req_height);        
             app.ctx.drawImage(app.showImage[0], 0, 0);
             //app.showImgCanvas.attr('src', app.img.src);
-            app.showImgCanvas.attr('width', app.req_width);
-            app.showImgCanvas.attr('height', app.req_height);
-        });
+            
+        //}
     }
 
     else if(app.aspect_ratio_user <= app.aspect_ratio_image) {
